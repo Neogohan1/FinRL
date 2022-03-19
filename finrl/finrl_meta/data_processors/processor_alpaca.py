@@ -30,9 +30,8 @@ class AlpacaProcessor:
             start_time = (date + pd.Timedelta("09:30:00")).isoformat()
             end_time = (date + pd.Timedelta("15:59:00")).isoformat()
             for tic in ticker_list:
-                barset = self.api.get_barset(
-                    [tic], time_interval, start=start_time, end=end_time, limit=500
-                ).df[tic]
+                barset = self.api.get_bars(
+                    [tic], time_interval, start=start_time, end=end_time).df[tic]
                 barset["tic"] = tic
                 barset = barset.reset_index()
                 data_df = data_df.append(barset)
