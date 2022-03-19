@@ -33,9 +33,6 @@ class AlpacaProcessor:
             start_time = (date + pd.Timedelta("09:30:00")).isoformat()
             end_time = (date + pd.Timedelta("15:59:00")).isoformat()
             for tic in ticker_list:
-                print(f"Start time: {start_time}")
-                print(f"End time: {end_time}")
-                print(f"Ticker: {tic}")
                 barset = self.api.get_bars(
                     tic, TimeFrame.Minute, start=start_time, end=end_time,adjustment='raw').df
                 barset["tic"] = tic
@@ -49,7 +46,7 @@ class AlpacaProcessor:
                 date = date + pd.Timedelta("01:00:00")
             if date.isoformat()[-14:-6] != "00:00:00":
                 raise ValueError("Timezone Error")
-        """times = data_df['time'].values
+        """times = data_df['timestamp'].values
         for i in range(len(times)):
             times[i] = str(times[i])
         data_df['time'] = times"""
