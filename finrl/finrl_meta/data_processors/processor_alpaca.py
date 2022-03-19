@@ -46,10 +46,10 @@ class AlpacaProcessor:
                 date = date + pd.Timedelta("01:00:00")
             if date.isoformat()[-14:-6] != "00:00:00":
                 raise ValueError("Timezone Error")
-        """times = data_df['timestamp'].values
+        times = data_df['timestamp'].values
         for i in range(len(times)):
             times[i] = str(times[i])
-        data_df['time'] = times"""
+        data_df['time'] = times
         return data_df
 
     def clean_data(self, df):
