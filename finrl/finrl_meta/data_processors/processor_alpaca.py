@@ -36,7 +36,7 @@ class AlpacaProcessor:
                 print(f"Start time: {start_time}")
                 print(f"End time: {end_time}")
                 barset = self.api.get_bars(
-                    [tic], TimeFrame.Minute, start=start_time, end=end_time,adjustment='raw').df[tic]
+                    [tic], TimeFrame.Minute, start=start_time, end=end_time,adjustment='raw').df
                 barset["tic"] = tic
                 barset = barset.reset_index()
                 data_df = data_df.append(barset)
