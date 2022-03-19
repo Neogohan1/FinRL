@@ -1,3 +1,6 @@
+START_DATE = "2022-01-01"
+END_DATE = "2022-01-30"
+
 # dir
 DATA_SAVE_DIR = "datasets"
 TRAINED_MODEL_DIR = "trained_models"
