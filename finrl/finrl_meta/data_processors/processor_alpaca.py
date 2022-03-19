@@ -13,8 +13,6 @@ class AlpacaProcessor:
                 self.api = tradeapi.REST(API_KEY, API_SECRET, APCA_API_BASE_URL, "v2")
             except BaseException:
                 raise ValueError("Wrong Account Info!")
-        else:
-            self.api = api
 
     def download_data(
         self, ticker_list, start_date, end_date, time_interval
