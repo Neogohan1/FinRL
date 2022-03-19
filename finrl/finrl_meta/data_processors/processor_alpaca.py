@@ -160,6 +160,7 @@ class AlpacaProcessor:
 
     def add_vix(self, data):
         vix_df = self.download_data(["VIXY"], self.start, self.end, self.time_interval)
+        vix_df = vix_df.rename(columns={"timestamp": "time"})
         cleaned_vix = self.clean_data(vix_df)
         vix = cleaned_vix[["time", "close"]]
         vix = vix.rename(columns={"close": "VIXY"})
