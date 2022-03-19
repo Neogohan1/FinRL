@@ -4,14 +4,15 @@ import pandas as pd
 import pytz
 import exchange_calendars as tc
 from stockstats import StockDataFrame as Sdf
+from alpaca_trade_api.rest import TimeFrame
 
 
 class AlpacaProcessor:
-    def __init__(self, API_KEY=None, API_SECRET=None, APCA_API_BASE_URL=None, api=None):
-        try:
-            self.api = tradeapi.REST(API_KEY, API_SECRET, APCA_API_BASE_URL, api_version='v2')
-        except BaseException:
-            raise ValueError("Wrong Account Info!")
+    def __init__(self, API_KEY=None, API_SECRET=None, APCA_API_BASE_URL=None, api="v2"):
+            self.api = tradeapi.REST(API_KEY, API_SECRET, APCA_API_BASE_URL, api_version="v2")
+            account = self.api.get_account()
+            account.status
+
 
     def download_data(
         self, ticker_list, start_date, end_date, time_interval
@@ -30,8 +31,10 @@ class AlpacaProcessor:
             start_time = (date + pd.Timedelta("09:30:00")).isoformat()
             end_time = (date + pd.Timedelta("15:59:00")).isoformat()
             for tic in ticker_list:
+                print(f"Start time: {start_time}")
+                print(f"End time: {end_time}")
                 barset = self.api.get_bars(
-                    [tic], time_interval, start=start_time, end=end_time).df[tic]
+                    [tic], TimeFrame.Minute, start=start_time, end=end_time,adjustment='raw').df[tic]
                 barset["tic"] = tic
                 barset = barset.reset_index()
                 data_df = data_df.append(barset)
