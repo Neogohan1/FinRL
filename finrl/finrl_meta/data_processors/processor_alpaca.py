@@ -10,6 +10,7 @@ from alpaca_trade_api.rest import TimeFrame
 class AlpacaProcessor:
     def __init__(self, API_KEY=None, API_SECRET=None, APCA_API_BASE_URL=None, api="v2"):
             self.api = tradeapi.REST(API_KEY, API_SECRET, APCA_API_BASE_URL, api_version="v2")
+            print("Attempting AlpacaProcessor")
             account = self.api.get_account()
             account.status
 
